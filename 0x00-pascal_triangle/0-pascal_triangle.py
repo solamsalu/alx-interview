@@ -3,7 +3,16 @@
 0-pascal_triangle
 """
 
+
 def pascal_triangle(n):
+    """_summary_
+
+    Args:
+        n (integer): number of rows
+
+    Returns:
+        list: paslcal triangle
+    """
     if n <= 0:
         return []
     
