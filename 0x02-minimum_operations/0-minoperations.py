@@ -5,19 +5,15 @@
 def minOperations(n):
     """ Calculates the fewest number of operations needed to 
     result in exactly n H characters in a file  """
-    if n <= 0:
+    if n <= 1:
         return 0
-    operations = 0
-    current = 1
-    copied = False
-    while current < n:
-        if n % current == 0:
-            operations += 2
-            current *= 2
-            copied = True  
-        elif copied:
-            operations += 1  
-            current += current // 2  
+
+    min_ops = 0
+    i = 2
+    while i <= n:
+        if n % i == 0:
+            min_ops += i
+            n = n / i
         else:
-            return 0
-    return operations
+            i += 1
+    return min_ops
