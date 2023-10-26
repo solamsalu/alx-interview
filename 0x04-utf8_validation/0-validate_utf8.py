@@ -1,11 +1,16 @@
 #!/usr/bin/python3
-""" Task 0: UTF-8 validation """
+
+"""  
+Task 0: UTF-8 validation 
+"""
 
 
 def validUTF8(data):
     """ Variable to keep track of the number of 
     continuation bytes expected """
+
     count = 0
+
     for num in data:
         # Ensure the number is within the valid range for a byte
         if num < 0 or num >= 256:
@@ -32,4 +37,4 @@ def validUTF8(data):
     if count > 0:
         return False
 
-    return True
+    return True 
