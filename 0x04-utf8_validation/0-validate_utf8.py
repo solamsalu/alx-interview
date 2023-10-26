@@ -6,8 +6,8 @@ Task 0: UTF-8 validation
 
 
 def validUTF8(data):
-    """ Variable to keep track of the number of 
-    continuation bytes expected """
+    """ Variable to keep track of the n-bytes expected
+    """
 
     n_bytes = 0
 
