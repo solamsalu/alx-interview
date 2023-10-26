@@ -10,10 +10,9 @@ def validUTF8(data):
     continuation bytes expected """
 
     count = 0
-
     for num in data:
         # Ensure the number is within the valid range for a byte
-        if num < 0 or num >= 256:
+        if not 0 <= num < 256:
             return False
 
         # If we're expecting continuation bytes, check if this byte is one
@@ -34,7 +33,4 @@ def validUTF8(data):
             return False
 
     # If we're still expecting continuation bytes, the data is invalid
-    if count > 0:
-        return False
-
-    return True 
+    return count == 0
