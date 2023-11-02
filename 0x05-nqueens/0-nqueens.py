@@ -15,7 +15,7 @@ The program should print every possible solution to the problem.
     You don’t have to print the solutions in a specific order.
 You are only allowed to import the sys module.
 """
-import sys
+from sys import argv
 
 
 def is_NQueen(cell: list) -> bool:
