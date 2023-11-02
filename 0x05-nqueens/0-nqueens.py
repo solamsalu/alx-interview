@@ -2,9 +2,11 @@
 """ N queens solution finder module. """
 import sys
 
+
 def print_board(board):
     """Prints the board"""
     print([[col for col in row] for row in board])
+
 
 def is_safe(board, row, col):
     """Checks if a position is safe"""
@@ -19,6 +21,7 @@ def is_safe(board, row, col):
             return False
     return True
 
+
 def solve_nqueens(board, col):
     """Solves the N queens problem"""
     if col >= len(board):
@@ -32,6 +35,7 @@ def solve_nqueens(board, col):
             res = solve_nqueens(board, col + 1) or res
             board[i][col] = 0
     return res
+
 
 def main():
     """Main function"""
@@ -51,6 +55,7 @@ def main():
         print("Solution does not exist")
         return
     sys.exit(0)
+
 
 if __name__ == "__main__":
     main()
