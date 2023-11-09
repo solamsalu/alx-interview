@@ -1,35 +1,28 @@
 #!/usr/bin/node
+const request = require('request');
 
-const axios = require('axios');
+const url = 'https://swapi-api.hbtn.io/api/films/' + process.argv[2];
 
-function getMovieCharacters(movieId) {
-    const movieUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
-
-    axios.get(movieUrl)
-        .then(response => {
-            const characters = response.data.characters;
-
-            characters.forEach(characterUrl => {
-                axios.get(characterUrl)
-                    .then(characterResponse => {
-                        const characterName = characterResponse.data.name;
-                        console.log(characterName);
-                    })
-                    .catch(error => {
-                        console.error(`Error fetching character data: ${error.message}`);
-                    });
-            });
-        })
-        .catch(error => {
-            console.error(`Error fetching movie data: ${error.message}`);
-        });
-}
-
-const movieId = process.argv[2];
-
-if (!movieId) {
-    console.error('Usage: node script.js <Movie ID>');
-    process.exit(1);
-}
-
-getMovieCharacters(movieId);
+request(url, (err, res, body) => {
+  if (err) {
+    console.log(err);
+  }
+  const characters = JSON.parse(body).characters;
+  const promises = characters.map((character) => {
+    return new Promise((resolve, reject) => {
+      request(character, (err, res, body) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(JSON.parse(body).name);
+      });
+    });
+  }
+  );
+  Promise.all(promises).then((names) => {
+    names.forEach((name) => {
+      console.log(name);
+    });
+  }
+  );
+});
