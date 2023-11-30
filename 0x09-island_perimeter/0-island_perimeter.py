@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Module for Island Perimeter
+"""
+
 
 def island_perimeter(grid):
     if not grid or not grid[0]:
